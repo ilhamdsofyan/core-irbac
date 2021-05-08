@@ -46,7 +46,17 @@ class UnitCampusController extends CI_Controller {
             	<div class='text-center'>
             		". anchor("/master/unit-campus/detail/{$field->id}", "<i class='fa fa-eye'></i>", ['class' => 'btn-normal btn-info btn-xs']) ."
             		". anchor("/master/unit-campus/update/{$field->id}", "<i class='fa fa-pencil-alt'></i>", ['class' => 'btn-normal btn-warning btn-xs']) ."
-            		". anchor("/master/unit-campus/delete/{$field->id}", "<i class='fa fa-trash-alt'></i>", ['class' => 'btn-normal btn-danger btn-xs']) ."
+                    ". $this->html->a(
+                            "<i class='fa fa-trash-alt'></i>", 
+                            "/master/unit-campus/hapus/{$field->id}", 
+                            [
+                                'class' => 'btn-normal btn-danger btn-xs',
+                                'data' => [
+                                    'method' => 'post',
+                                    'confirm' => 'Yakin akan menghapus data ini?'
+                                ],
+                            ]
+                        ) ."
             	</div>
             ";
  
@@ -108,7 +118,10 @@ class UnitCampusController extends CI_Controller {
 
                 return redirect('/master/unit-campus/index','refresh');
             } else {
-                $this->session->set_flashdata('danger', 'Simpan data unit gagal');
+                $this->session->set_flashdata('danger', "
+                    Simpan data unit gagal: <br/>
+                    ". $this->helpers->valueErrors($model->getErrors(), true) ."
+                ");
             }
         }
 
@@ -133,6 +146,23 @@ class UnitCampusController extends CI_Controller {
             'model' => $model,
             'readonly' => true,
         ]);
+    }
+
+    public function actionHapus($id)
+    {
+        $model = $this->UnitCampus->findOne($id);
+
+        if (!$model) {
+            return show_error('Data tidak ditemukan', 404);
+        }
+
+        if ($model->delete($id)) {
+            $this->session->set_flashdata('success', 'Hapus data unit berhasil');
+
+            return redirect('/master/unit-campus/index','refresh');
+        } else {
+            $this->session->set_flashdata('danger', 'Hapus data unit gagal');
+        }
     }
 
 }
