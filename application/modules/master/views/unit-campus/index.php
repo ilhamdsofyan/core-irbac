@@ -1,7 +1,13 @@
 <div class="form grid-1">
     <div class="card">
-        <div class="card-header">
+        <div class="card-header d-flex flex-space-between">
             <h6><?= $title ?></h6>
+
+            <div class="select-export">
+                <?= anchor('/master/unit-campus/tambah', '<i class="fa fa-plus"></i> Tambah', [
+                    'class' => 'btn-normal btn-primary'
+                ]); ?>
+            </div>
         </div>
 
         <div class="card-body">

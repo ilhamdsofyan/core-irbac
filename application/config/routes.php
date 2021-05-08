@@ -76,9 +76,9 @@ $route['site/google-auth'] = 'SiteController/actionGoogleAuth';
 # MASTER UNIT CAMPUS
 $route['master/unit-campus'] 						= 'master/UnitCampusController/actionIndex';
 $route['master/unit-campus/index'] 					= 'master/UnitCampusController/actionIndex';
+$route['master/unit-campus/tambah'] 				= 'master/UnitCampusController/actionTambah';
 $route['master/unit-campus/detail/(:num)'] 			= 'master/UnitCampusController/actionDetail/$1';
 $route['master/unit-campus/get-data']['post'] 		= 'master/UnitCampusController/actionGetData';
-$route['master/unit-campus/tambah']['post'] 		= 'master/UnitCampusController/actionTambah';
 $route['master/unit-campus/edit/(:num)']['post'] 	= 'master/UnitCampusController/actionEdit/$1';
 $route['master/unit-campus/hapus/(:num)']['post'] 	= 'master/UnitCampusController/actionHapus/$1';
 

@@ -64,6 +64,29 @@ class UnitCampusController extends CI_Controller {
         echo json_encode($output);
 	}
 
+    public function actionTambah()
+    {
+        $this->layout->title = 'Master Unit Campus';
+        $this->layout->view_js = 'ext/tambah_js';
+        $this->layout->view_css = 'ext/tambah_css';
+
+        $model = new UnitCampus;
+
+        if ($post = $this->input->post('Unit', true)) {
+            if ($model->insert($post)) {
+                $this->session->set_flashdata('success', 'Simpan data unit berhasil');
+
+                return redirect('/master/unit-campus/index','refresh');
+            } else {
+                $this->session->set_flashdata('success', 'Simpan data unit gagal');
+            }
+        }
+
+        $this->layout->render('form', [
+            'model' => $model,
+        ]);
+    }
+
 }
 
 /* End of file UnitCampusController.php */
