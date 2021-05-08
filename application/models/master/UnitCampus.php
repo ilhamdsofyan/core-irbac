@@ -126,23 +126,34 @@ class UnitCampus extends MY_Model {
         return $statuses;
     }
 
+    public function getStatusValue($status = null)
+    {
+        $list_status = self::getListStatus();
+
+        if ($this->unit_status !== null && $status === null) {
+            $status = $this->unit_status;
+        }
+
+        return def($list_status, $status, '-');
+    }
+
     public function getListParent($ignore_self = false, $dropdown = false)
     {
         $query = $this->find()->select(['id', 'unit_id', 'unit_name']);
 
         if (!empty($this->id) && $ignore_self === true) {
-            $query->where(['id != ', $this->id]);
+            $query->where(['id != ' => $this->id]);
         }
 
         $models = $this->queryAll($query);
 
         $parents = [];
         foreach ($models as $key => $model) {
-            $parents[$model->id] = "[{$model->unit_id}] - {$model->unit_name}";
+            $parents[$model->unit_id] = "[{$model->unit_id}] - {$model->unit_name}";
         }
 
         if ($dropdown === true) {
-            $parents = array_merge(['' => '- Pilih Parent ID -'], $parents);
+            $parents = ['' => '- Pilih Parent ID -'] + $parents;
         }
 
         return $parents;

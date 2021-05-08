@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'SiteController/actionIndex';
-$route['404_override'] = 'SiteController/action404NotFound';
+$route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 # START API
@@ -79,8 +79,9 @@ $route['master/unit-campus/index'] 					= 'master/UnitCampusController/actionInd
 $route['master/unit-campus/tambah'] 				= 'master/UnitCampusController/actionTambah';
 $route['master/unit-campus/detail/(:num)'] 			= 'master/UnitCampusController/actionDetail/$1';
 $route['master/unit-campus/get-data']['post'] 		= 'master/UnitCampusController/actionGetData';
-$route['master/unit-campus/edit/(:num)']['post'] 	= 'master/UnitCampusController/actionEdit/$1';
 $route['master/unit-campus/hapus/(:num)']['post'] 	= 'master/UnitCampusController/actionHapus/$1';
+$route['master/unit-campus/update/(:num)']['post'] 	= 'master/UnitCampusController/actionUpdate/$1';
+$route['master/unit-campus/update/(:num)']			= 'master/UnitCampusController/actionUpdate/$1';
 
 # END MODULE MASTER ROUTES
 

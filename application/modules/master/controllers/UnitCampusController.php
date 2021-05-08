@@ -39,7 +39,7 @@ class UnitCampusController extends CI_Controller {
             $row[] = $field->unit_name;
             $row[] = $field->unit_parent_id;
             $row[] = $field->unit_level;
-            $row[] = $field->unit_status;
+            $row[] = $field->getStatusValue();
             $row[] = $field->unit_kerjasama;
             $row[] = $field->unit_type;
             $row[] = "
@@ -78,7 +78,34 @@ class UnitCampusController extends CI_Controller {
 
                 return redirect('/master/unit-campus/index','refresh');
             } else {
-                $this->session->set_flashdata('success', 'Simpan data unit gagal');
+                $this->session->set_flashdata('danger', 'Simpan data unit gagal');
+            }
+        }
+
+        $this->layout->render('form', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionUpdate($id)
+    {
+        $this->layout->title = 'Master Unit Campus';
+        $this->layout->view_js = 'ext/tambah_js';
+        $this->layout->view_css = 'ext/tambah_css';
+
+        $model = $this->UnitCampus->findOne($id);
+
+        if (!$model) {
+            return show_error('Data tidak ditemukan', 404);
+        }
+
+        if ($post = $this->input->post('Unit', true)) {
+            if ($model->update($post, $id)) {
+                $this->session->set_flashdata('success', 'Simpan data unit berhasil');
+
+                return redirect('/master/unit-campus/index','refresh');
+            } else {
+                $this->session->set_flashdata('danger', 'Simpan data unit gagal');
             }
         }
 
