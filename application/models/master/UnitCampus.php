@@ -19,9 +19,11 @@ class UnitCampus extends MY_Model {
             [
                 'field' => 'unit_id',
                 'rules' => 'required|max_length[4]|is_unique[unit_campus.unit_id]',
-                // 'errors' => [
-                //     'required' => 'Password lama wajib diisi',
-                // ],
+                'errors' => [
+                    'required' => 'ID Unit harus diisi',
+                    'is_unique' => 'ID Unit sudah terdaftar',
+                    'max_length' => 'ID Unit tidak boleh melebihi 4 karakter',
+                ],
             ],
             [
                 'field' => 'unit_name',
