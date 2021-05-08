@@ -78,7 +78,10 @@ class UnitCampusController extends CI_Controller {
 
                 return redirect('/master/unit-campus/index','refresh');
             } else {
-                $this->session->set_flashdata('danger', 'Simpan data unit gagal');
+                $this->session->set_flashdata('danger', "
+                    Simpan data unit gagal: <br/>
+                    ". $this->helpers->valueErrors($model->getErrors(), true) ."
+                ");
             }
         }
 
@@ -111,6 +114,24 @@ class UnitCampusController extends CI_Controller {
 
         $this->layout->render('form', [
             'model' => $model,
+        ]);
+    }
+
+    public function actionDetail($id)
+    {
+        $this->layout->title = 'Master Unit Campus';
+        $this->layout->view_js = 'ext/tambah_js';
+        $this->layout->view_css = 'ext/tambah_css';
+
+        $model = $this->UnitCampus->findOne($id);
+
+        if (!$model) {
+            return show_error('Data tidak ditemukan', 404);
+        }
+
+        $this->layout->render('form', [
+            'model' => $model,
+            'readonly' => true,
         ]);
     }
 
