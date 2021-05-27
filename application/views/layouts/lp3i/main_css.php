@@ -6,6 +6,7 @@
 
 <link rel="stylesheet" href="<?= base_url('/web/assets/plugins/daterangepicker/daterangepicker.css') ?>">
 <link rel="stylesheet" href="<?= base_url('/web/assets/plugins/sweetalert2/sweetalert2.css') ?>">
+<link rel="stylesheet" href="<?= base_url('/web/assets/css/custom.css') ?>">
 
 <?php 
 # Load self-made file views for setting css
