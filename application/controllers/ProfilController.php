@@ -21,7 +21,6 @@ class ProfilController extends CI_Controller {
 		$this->layout->view_js = [
 			'_partial/sub_js',
 			'_partial/js_password',
-			'_partial/js_karir',
 		];
 		$this->layout->view_css = '/_partial/sub_css';
 		$this->layout->title = 'Profil';	
@@ -43,8 +42,6 @@ class ProfilController extends CI_Controller {
 			$data_profil = '';
 			$param = '';
 		}
-
-		$dokumens = $this->jenisdokumen->findAll(['is_lampiran' => 1]);
 
 		$this->layout->render('index', [
 			'user_detail' => $user_detail,
