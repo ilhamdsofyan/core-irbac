@@ -14,7 +14,7 @@
         <meta content="<?= env('APP_FULL_NAME') ?>" name="description" />
         <meta content="<?= env('APP_COPYRIGHT') .' '. env('APP_COMPANY') ?>" name="author" />
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="<?= base_url('/web/assets/plugins/fontawesome-free/css/all.min.css') ?>">
+        <link rel="stylesheet" href="<?= base_url('/web/assets/plugins/fontawesome/fontawesome-5.11.2/css/all.min.css') ?>">
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <!-- icheck bootstrap -->
