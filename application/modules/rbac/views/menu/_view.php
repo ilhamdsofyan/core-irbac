@@ -21,7 +21,10 @@
                 </div>
                 <div class="form-group">
                     <label><i><?= 'Icon Class' ?></i></label>
-                    <input type="text" class="form-control input-sm" name="Menu[item][<?php echo $i ?>][class]" value="<?php echo $menu->class?>" placeholder="<?= 'Icon Class' ?>">
+                    <button class="btn btn-secondary btn-sm d-block mb-2" type="button" id="GetIconPicker" data-iconpicker-input="<?= 'input#IconInput-' . $i ?>" data-iconpicker-preview="<?= 'i#IconPreview-' . $i ?>">
+                        <i id="IconPreview-<?= $i ?>"></i> Select Icon
+                    </button>
+                    <input type="text" class="form-control input-sm" id="<?= 'IconInput-' . $i ?>" name="Menu[item][<?php echo $i ?>][class]" value="<?php echo $menu->class?>" placeholder="<?= 'Icon Class' ?>">
                 </div>
                 <div class="form-group">
                     <div style="position:relative; margin-left: 25px;">
