@@ -94,7 +94,7 @@ class Menuhelper
         $replacements = [
             '{label}' => strtr($this->labelTemplate, ['{label}' => $item['label'],]),
             '{icon}' => empty($item['icon']) ? $this->defaultIconHtml
-                : '<i class="' . static::$iconClassPrefix . $item['icon'] . '"></i> ',
+                : '<i class="' . $item['icon'] . '"></i> ',
             '{url}' => isset($item['url']) ? site_url($item['url']) : 'javascript:void(0);',
             '{active}' => $activeClass,
         ];

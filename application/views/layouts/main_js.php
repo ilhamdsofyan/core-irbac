@@ -1,3 +1,4 @@
+<script src="https://kit.fontawesome.com/a4da3cc46a.js" crossorigin="anonymous"></script>
 <!-- jQuery -->
 <script src="<?= base_url('/web/assets/plugins/jquery/jquery.min.js') ?>"></script>
 <!-- Bootstrap 4 -->

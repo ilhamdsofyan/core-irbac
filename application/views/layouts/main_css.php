@@ -1,5 +1,3 @@
-<!-- Font Awesome -->
-<link rel="stylesheet" href="<?= base_url('/web/assets/plugins/fontawesome-free/css/all.min.css') ?>">
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <!-- overlayScrollbars -->

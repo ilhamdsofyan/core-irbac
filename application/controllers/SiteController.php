@@ -18,9 +18,7 @@ class SiteController extends CI_Controller {
 		$this->layout->layout = 'main';
 		$this->layout->view_js = '_partial/index_js';
 		$this->layout->view_css = '_partial/index_css';
-		$this->layout->render('index', [
-			'employee_summary' => $employee_summary,
-		]);
+		$this->layout->render('index', []);
 	}
 
 	public function actionLogin()
