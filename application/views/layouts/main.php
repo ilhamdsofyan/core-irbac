@@ -138,7 +138,7 @@
 				<div class="sidebar">
 					<!-- Sidebar Menu -->
 					<nav class="mt-2">
-						<?php $this->menuhelper->run() ?>
+						<?php if (!empty($this->session->userdata('identity'))) $this->menuhelper->run() ?>
 				  	</nav>
 				  	<!-- /.sidebar-menu -->
 				</div>

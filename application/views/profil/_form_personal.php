@@ -95,13 +95,6 @@
 				($user_detail->jenis_kelamin ?? '' == 'w' ? TRUE : FALSE),['style' => 'margin-left:20px;']);?>
 				<?= form_label('Perempuan') ?>
 			</div>
-			<div class="col-md-6">
-				<?= form_label('Pendidikan', 'id_pendidikan_id', ['class' => 'control-label']); ?>
-				<?= form_dropdown('Personal[pddk_terakhir]', $data_pendidikan, $user_detail->pddk_terakhir ?? '', [
-					'class' => 'form-control',
-					'id' => 'pendidikan_id',
-				]); ?>
-			</div>
 		</div>
 	</div>
 
@@ -144,34 +137,6 @@
 		]); ?>
 	</div>
 
-	<div class="form-group">
-		<?= form_label('Keluarga Dekat', 'id_keluarga_dekat', ['class' => 'control-label']); ?>
-		<div class="row">
-			<div class="col-md-4">
-				<?= form_input('Personal[keluarga_dekat]', $user_detail->keluarga_dekat ?? '', [
-					'class' => 'form-control',
-					'id' => 'id_keluarga_dekat',
-				]); ?>
-				<small class="help-block">Nama</small>
-			</div>
-			<div class="col-md-4">
-				<?= form_dropdown('Personal[hubungan_id]', $data_hubungan, $user_detail->hubungan_id ?? '', [
-					'class' => 'form-control',
-					'id' => 'id_hubungan_id',
-				]); ?>
-				<small class="help-block">Hubungan</small>
-			</div>
-			<div class="col-md-4">
-				<?= form_input('Personal[telp_keluarga]', $user_detail->telp_keluarga ?? '', [
-					'class' => 'form-control',
-					'id' => 'id_nama_belakang',
-					'onkeypress' => 'return isNumberKey(event)',
-				]); ?>
-				<small class="help-block">Nomor Telepon</small>
-			</div>
-		</div>
-	</div>
-
 	<?php 
 
 	if($data_login >= $data_profil): ?>
@@ -185,7 +150,7 @@
 	]) ?>
 	    <?= $this->html->button('Batal', [
     	'type' => 'reset',
-		'class' => 'btn default',
+		'class' => 'btn btn-outline-secondary',
 		'visible' => (
 			($this->session->userdata('identity')->id == def($user, 'id'))
     		|| $this->helpers->isSuperAdmin()
@@ -202,7 +167,7 @@
 	]) ?>
 	    <?= $this->html->button('Batal', [
     	'type' => 'reset',
-		'class' => 'btn default',
+		'class' => 'btn btn-outline-secondary',
 		'visible' => (
 			($this->session->userdata('identity')->id == def($user, 'id'))
     		|| $this->helpers->isSuperAdmin() || $this->helpers->isAdminDirektorat() ||  $this->helpers->isAdminCabang()

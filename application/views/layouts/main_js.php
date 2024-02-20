@@ -1,3 +1,4 @@
+<script src="<?= base_url('/web/assets/plugins/fontawesome/iconpicker-1.5.0.js') ?>"></script>
 <!-- jQuery -->
 <script src="<?= base_url('/web/assets/plugins/jquery/jquery.min.js') ?>"></script>
 <!-- Bootstrap 4 -->

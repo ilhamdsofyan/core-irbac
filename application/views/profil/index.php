@@ -1,5 +1,3 @@
-<link href="<?= base_url('web/assets/pages/css/profile.min.css') ?>" rel="stylesheet" type="text/css" />
-
 <?php if (empty($user_detail)): ?>
     <div class="alert alert-info" style="margin-top: 10px">
         Mohon lengkapi <b>info personal</b> untuk melakukan pengisian detail data tab lainnya.
@@ -74,24 +72,6 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="#tab_1_1" data-toggle="tab">Info Personal</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#tab_1_2" id="btn_biodata" data-toggle="tab">Info Biodata Keluarga</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#tab_1_3" id="btn_pendidikan" data-toggle="tab">History Pendidikan</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#tab_1_4" id="btn_sertifikasi" data-toggle="tab">Training</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#tab_1_5" id="btn_karir_lp3i" data-toggle="tab" >History Karir LP3I</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#tab_1_6" id="btn_pengalaman" data-toggle="tab">Pengalaman Kerja</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#tab_1_7" data-toggle="tab">Dokumen Pribadi</a>
-                    </li>
                 </ul>
             </div>
 
@@ -106,50 +86,6 @@
                         ]); ?>
                     </div>
                     <!-- END PERSONAL INFO TAB -->
-                    <!-- CHANGE AVATAR TAB -->
-                    <div class="tab-pane" id="tab_1_2">
-                        <?php $this->layout->renderPartial('_form_biodata_keluarga', [
-                            'data_pendidikan' => $data_pendidikan,
-                            'data_hubungan' => $data_hubungan,
-                        ]); ?>
-                    </div>
-                    <!-- END CHANGE AVATAR TAB -->
-                    <!-- CHANGE PASSWORD TAB -->
-                    <div class="tab-pane" id="tab_1_3">
-                        <?php $this->layout->renderPartial('_form_history_pendidikan', [
-                        ]); ?>
-                    </div>
-                    <!-- END CHANGE PASSWORD TAB -->
-                    <!-- PRIVACY SETTINGS TAB -->
-                    <div class="tab-pane" id="tab_1_4">
-                        <?php $this->layout->renderPartial('_form_user_sertifikasi', [
-                          
-                        ]); ?>
-                        </form>
-                    </div>
-                    <div class="tab-pane" id="tab_1_5">
-                        <?php $this->layout->renderPartial('_form_karir_lp3i', [
-                            // 'data_grade' => $data_grade,
-                            'data_depart' => $data_depart,
-                            'data_Groupunit' => $data_Groupunit,
-                        ]); ?>
-                    </div>
-                    <!-- END PRIVACY SETTINGS TAB -->
-                    <!-- PENGALAMAN TAB -->
-                    <div class="tab-pane" id="tab_1_6">
-                        <?php $this->layout->renderPartial('_form_pengalaman', [
-                        ]); ?>
-                    </div>
-                    <!-- PENGALAMAN TAB -->
-                    <!-- DOKUMEN TAB -->
-                    <div class="tab-pane" id="tab_1_7">
-                        <?php $this->layout->renderPartial('_form_dokumen', [
-                            'dokumens' => $dokumens,
-                            'data_lampiran' => $data_lampiran,
-                            'param' => $param,
-                        ]); ?>
-                    </div>
-                    <!-- DOKUMEN TAB -->
                 </div>
             </div>
         </div>

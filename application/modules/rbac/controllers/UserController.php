@@ -10,14 +10,6 @@ class UserController extends CI_Controller {
 			'master/user',
 			'master/group',
 			'master/usergroup',
-			'master/department',
-			'master/unit',
-			'master/gradingtype',
-			'master/status',
-			'master/unitgroup',
-			'master/jabatan',
-			'master/subgrade',
-			'master/designation',
 			'transaksi/userdetail',
 		]);
 	}
@@ -27,27 +19,9 @@ class UserController extends CI_Controller {
 		$this->layout->view_js = ['js', 'js_form'];
 		$this->layout->view_css = 'css';
 
-		$statuses = $this->status->getListStatus(true);
-
 		$this->layout->render('index', [
-			'statuses' => $statuses,
+			// 'statuses' => $statuses,
 		]);
-	}
-
-	public function actionGetDepartment($unit_id='')
-	{
-		$units = $this->unit->get($unit_id);
-		$departments = [];
-
-		if ($units) {
-			$department = $this->department->getAll(['sbu_id' => $units->sbu_id]);
-			$departments = $this->department->getListDepartment($department);
-		}
-
-		return $this->output
-	        ->set_content_type('application/json')
-	        ->set_status_header(200) // Return status
-	        ->set_output(json_encode($departments));
 	}
 
 	public function actionGetData()
@@ -140,11 +114,9 @@ class UserController extends CI_Controller {
 	public function actionDetail($id)
 	{
 		$user_detail = $this->userdetail->get(['user_id' => $id]);
-		$units = $this->unit->getUnitByUserGroup($id);
 
 		$result = [
 			'user_detail' => null,
-			'units' => $this->unit->getListUnits($units),
 			'atasans' => null,
 		];
 
@@ -160,7 +132,6 @@ class UserController extends CI_Controller {
 
 			$result = [
 				'user_detail' => $user_detail,
-				'units' => $this->unit->getListUnits($units),
 				'atasans' => null,
 			];
 		}
@@ -196,81 +167,6 @@ class UserController extends CI_Controller {
 	        ->set_status_header(200) // Return status
 	        ->set_output(json_encode($atasans));
 	}
-
-	// public function setDataNIK($setUnitID,$setStatusID,$setJoinDate)
-	// {
-	// 	// PENGECEKAN NOMOR URUT AKHIR CABANG
-	// 	$count_params = "(unit_id = ".$setUnitID. " AND nik != '' )";
-	// 	$count_query = $this->userdetail->SelData($count_params,'tbl_user_detail');
-	// 	$count = $count_query->num_rows();
-	// 	$set_count = $count+1;
-
-	// 	// PENGECEKAN KODE SBU & KODE UNIT
-	// 	$sbu_query = array('tbl_m_unit.id' => $setUnitID);
-	// 	$sbu_query = $this->userdetail->CariSBU($sbu_query);
-
-	// 	foreach ($sbu_query as $keyx => $valuex) {
-	// 		$sbu_code = $valuex['kode_sbu'];
-	// 		$unit_code = $valuex['kode_unit'];
-	// 	}
-
-	// 	// PENGECEKAN STATUS KERJA
-	// 	$stats_kj_query = array('tbl_user_detail.status_id' => $setStatusID);
-	// 	$stats_kj_query = $this->userdetail->CariStatus($stats_kj_query);
-
-	// 	foreach ($stats_kj_query as $keyx => $valuex) {
-	// 		$status = $valuex['kd_status'];
-	// 	}
-
-	// 	// PENGECEKAN JUMLAH DIGIT
-	// 	if(strlen($set_count) == 1){
-	// 		$set_num = "000".$set_count;
-	// 	}elseif(strlen($set_count) == 2){
-	// 		$set_num = "00".$set_count;
-	// 	}elseif(strlen($set_count) == 3){
-	// 		$set_num = "0".$set_count;
-	// 	}else{
-	// 		$set_num = $set_count;
-	// 	}
-
-	// 	// AMBIL TAHUN & TANGGAL 
-	// 	$month = date('m', strtotime($setJoinDate));
-	// 	$year = date('Y', strtotime($setJoinDate));
-	// 	$sub_year = substr($year, -2,2);
-	// 	$sub_date = $month.$sub_year;
-
-	// 	$dataNIK = $set_num.".".$sub_date.".".$sbu_code.".".$unit_code.".".$status;
-	// 	return $dataNIK;
-	// }
-
-	// public function actionSimpanDetail($id)
-	// {
-	// 	$user_detail = $this->userdetail->get(['user_id' => $id]);
-
-	// 	if ($post = $this->input->post('UserDetail')) {
-	// 		$post['user_id'] = $id;
-
-	// 		$set_nik = $this->setDataNIK($post['unit_id'],$post['status_id'],$post['tanggal_gabung']);
-
-	// 		$post['nik'] = $set_nik;
-	// 		$post['tanggal_gabung'] = $post['tanggal_gabung'] ? date('Y-m-d', strtotime($post['tanggal_gabung'])) : '';
-	// 		$post['tanggal_selesai'] = $post['tanggal_selesai'] ? date('Y-m-d', strtotime($post['tanggal_selesai'])) : '';
-
-	// 		if ($user_detail) {
-	// 			$save = $this->userdetail->update($post, $user_detail->id);
-	// 		} else {
-	// 			$save = $this->userdetail->insert($post);
-	// 		}
-
-	// 		if ($save) {
-	// 			$this->session->set_flashdata('success', 'Proses simpan data berhasil');
-	// 		} else {
-	// 			$this->session->set_flashdata('danger', 'Proses simpan data gagal');
-	// 		}
-	// 	}
-
-	// 	redirect('/rbac/user/', 'refresh');
-	// }
 
 	public function actionSimpanDetail($id)
 	{
@@ -411,114 +307,6 @@ class UserController extends CI_Controller {
 			}
 		} else {
 			$result = ['message' => 'Data tidak ditemukan'];
-		}
-
-		return $this->output
-	        ->set_content_type('application/json')
-	        ->set_status_header(200) // Return status
-	        ->set_output(json_encode($result));
-	}
-
-	public function actionGetGrade()
-	{
-		$grading_type = $this->input->get('grading_type');
-		$lists = [];
-
-		$result = [
-			'message' => 'Data kosong',
-			'data' => $lists
-		];
-
-		if ($grading_type) {
-			$result = [
-				'message' => '',
-				'data' => $this->gradingtype->listGradingType($grading_type)
-			];
-		}
-
-		return $this->output
-	        ->set_content_type('application/json')
-	        ->set_status_header(200) // Return status
-	        ->set_output(json_encode($result));
-	}
-
-	public function actionGetDesignation()
-	{
-		$kelompok = $this->input->get('kelompok');
-		$lists = [];
-
-		$result = [
-			'message' => 'Data kosong',
-			'data' => $lists
-		];
-
-		if ($kelompok) {
-			$result = [
-				'message' => '',
-				'data' => $this->designation->getListDesignation($kelompok)
-			];
-		}
-
-		return $this->output
-	        ->set_content_type('application/json')
-	        ->set_status_header(200) // Return status
-	        ->set_output(json_encode($result));
-	}
-
-	public function actionGetKelasJabatan()
-	{
-		$grading_type = $this->input->get('grading_type');
-		$grade = $this->input->get('grade');
-		$golongan = $this->input->get('golongan');
-
-		$result = [
-			'message' => 'Data kosong',
-			'data' => [
-				'kelas' => '',
-				'jabatan' => ''
-			]
-		];
-
-		if ($grading_type && $grade && $golongan) {
-			$kelas = '';
-
-			if ($grading_type == Gradingtype::JENIS_STRUKTURAL) {
-				$kelas = $this->jabatan->getKelasJabatan($grade);
-			} elseif ($grading_type == Gradingtype::JENIS_FUNGSIONAL) {
-				$kelas = $this->subgrade->getKelasJabatan($grade, $golongan);
-			}
-
-			$jabatan = $this->jabatan->findOne($grade);
-
-			$result = [
-				'message' => '',
-				'data' => [
-					'kelas' => $kelas,
-					'jabatan' => def($jabatan, 'desc', '')
-				]
-			];
-		}
-
-		return $this->output
-	        ->set_content_type('application/json')
-	        ->set_status_header(200) // Return status
-	        ->set_output(json_encode($result));
-	}
-
-	public function actionGetGolongan($grade)
-	{
-		$result = [
-			'message' => 'Data kosong',
-			'data' => []
-		];
-
-		$golongans = Subgrade::listGolongan($grade);
-
-		if ($golongans) {
-			$result = [
-				'message' => '',
-				'data' => $golongans
-			];
 		}
 
 		return $this->output

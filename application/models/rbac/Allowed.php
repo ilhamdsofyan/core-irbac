@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Allowed extends MY_Model {
-	public $tableName = 'tbl_allowed';
+	public $tableName = 'sys_allowed';
 	public $soft_delete = false;
 
 	public function __construct()

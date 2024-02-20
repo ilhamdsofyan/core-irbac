@@ -20,7 +20,6 @@ class User extends MY_Model {
     	$this->load->model([
     		'master/usergroup',
     		'master/group',
-            'master/unit',
             'transaksi/userdetail',
     	]);
     }
@@ -40,7 +39,6 @@ class User extends MY_Model {
         $user = $this->session->userdata('identity');
 
         $groups = $this->group->getGroups($this->session->userdata('group_id'));
-        $units = $this->unit->getUnitByUserGroup($user->id, true);
 
         $this->db->from($this->tableName);
         $this->db->select($this->datatable_columns);
@@ -56,7 +54,6 @@ class User extends MY_Model {
         $this->db->join('tbl_user_detail', 'tbl_user_detail.user_id = tbl_user.id', 'left');
 
         $this->db->group_start();
-            $this->db->where_in('tbl_user_detail.unit_id', $units);
             $this->db->or_where(['tbl_user_detail.unit_id' => null]);
             $this->db->or_where(['tbl_user.created_by' => $user->id]);
         $this->db->group_end();

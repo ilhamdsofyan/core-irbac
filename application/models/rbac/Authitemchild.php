@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Authitemchild extends MY_Model {
-	public $tableName = 'tbl_auth_item_child';
+	public $tableName = 'sys_auth_item_child';
 	public $soft_delete = false;
 
 	private $_parent;
