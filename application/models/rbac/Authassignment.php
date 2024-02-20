@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Authassignment extends MY_Model {
-	public $tableName = 'tbl_auth_assignment';
+	public $tableName = 'sys_auth_assignment';
 	public $soft_delete = false;
 
 	public function __construct()

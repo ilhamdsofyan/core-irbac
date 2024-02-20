@@ -38,44 +38,61 @@ class AuthHelper
 	{
 		$status = $this->CI->session->userdata('status_login');
 
-		if (strpos(uri_string(), 'api/') === false ) {
-			if ($this->isGuest() && !in_array(uri_string(), $this->allowed)) {
-	            $this->CI->session->set_flashdata('info', 'Silahkan login kedalam aplikasi');
-	            return redirect('site/login');
+     	if (
+			strpos(uri_string(), 'api/') === false
+			&& strpos(uri_string(), 'commands/') === false
+			&& !$this->CI->input->is_cli_request()
+		) {
+			# IDS, Bolehkan akses tanpa login jika route url masuk kategori allowed
+		  	if ($this->isGuest() && !in_array(uri_string(), $this->allowed)) {
+		        if (uri_string() != 'login' && uri_string() != 'site/login'){
+
+		        	if (!empty($_SERVER['QUERY_STRING'])) {
+			            $uri = uri_string() . '?' . $_SERVER['QUERY_STRING'];
+			        } else {
+			            $uri = uri_string();
+			        }
+			        $this->CI->session->set_userdata('redirect', $uri);
+
+		            $this->CI->session->set_flashdata('info', 'Silahkan login kedalam aplikasi');
+		            return redirect('site/login');
+		        }
 		    } elseif ($status === self::STATUS_LOCKED) {
-		    	if (!in_array(uri_string(), $this->allowed)) {
+		    	if (
+		    		uri_string() != 'site/lock' 
+		    		&& uri_string() != 'lock' 
+		    		&& uri_string() != 'site/logout'
+		    	) {
+
 		            $this->CI->session->set_flashdata('info', 'Halaman terkunci, silahkan login');
 		            return redirect('site/lock');
 		        }
 		    }
-		    # Hapus komentar pada kondisi dibawah ini untuk mengaktifkan fitur RBAC
-		    // elseif (in_array(uri_string(), $this->allowed) || $this->checkPermission()) {
-		    // 	return true;
-		    // }
 		}
-
-		return true;
 	}
 
 	public function checkPermission()
 	{
 		$session = $this->CI->session->userdata();
 		$current_route = $this->CI->helpers->getCurrentSite();
+		$current_route_2 = uri_string();
 
 		if (substr($current_route, 0, 1) == '/') {
             $current_route = substr($current_route, 1);
         }
 
-		if (in_array($current_route, $this->allowed)) {
+		if (
+			in_array($current_route, $this->allowed)
+			|| in_array($current_route_2, $this->allowed)
+		) {
 			return true;
 		}
-
 
 		if (!empty($session['status_login']) && $session['status_login'] === self::STATUS_LOGIN) {
 			$groups = $session['group_id'];
 			$routes = $this->CI->helpers->getRoutesByGroup($groups);
 
-			if (in_array($current_route, $routes)) {
+			if (in_array($current_route, $routes) || in_array($current_route_2, $routes)) {
 				return true;
 			} else {
 				return $this->redirectUnPermissioned($current_route);

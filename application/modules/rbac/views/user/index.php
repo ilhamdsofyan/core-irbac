@@ -102,15 +102,6 @@
             		</div>
 
             		<div class="form-group">
-            			<?= form_label('Unit', 'id_unit'); ?>
-            			<?= form_dropdown('UserDetail[unit_id]', null, '', [
-            				'class' => 'form-control',
-                            'required' => true,
-            				'id' => 'id_unit'
-            			]); ?>
-            		</div>
-
-            		<div class="form-group">
             			<?= form_label('Departemen', 'id_department'); ?>
             			<?= form_dropdown('UserDetail[department_id]', ['' => '- Pilih Department -'], '', [
             				'class' => 'form-control',

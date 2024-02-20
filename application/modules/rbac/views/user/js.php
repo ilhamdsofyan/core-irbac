@@ -100,16 +100,6 @@
     function setDataToForm(data, viewOnly = true) {
         let detail = data.user_detail;
 
-        // START SET DROPDOWN UNIT
-        let dropdown_unit = $("#id_unit");
-        dropdown_unit.empty();
-
-        dropdown_unit.append(`<option value="">- Pilih Unit -</option>`);
-        $.each(data.units, function(index, val) {
-            dropdown_unit.append(`<option value="${index}">${val}</option>`);
-        });
-        // END SET DROPDOWN UNIT
-
         // START SET DROPDOWN ATASAN
         let dropdown_atasan = $("#id_atasan");
         dropdown_atasan.empty();

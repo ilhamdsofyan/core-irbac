@@ -20,7 +20,15 @@ $hook['post_controller_constructor'][] = array(
     'params'   => array()
 );
 
-$hook['post_controller_constructor'][] = array(
+$hook['post_controller'][] = array(
+    'class'    => 'AuthHelper',
+    'function' => 'checkPermission',
+    'filename' => 'AuthHelper.php',
+    'filepath' => 'hooks',
+    'params'   => array()
+);
+
+$hook['post_controller'][] = array(
     'class'    => 'CommonHook',
     'function' => 'setNotification',
     'filename' => 'CommonHook.php',
