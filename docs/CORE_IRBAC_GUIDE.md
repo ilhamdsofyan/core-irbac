@@ -236,7 +236,49 @@ Partial yang lazim dipakai:
 
 ---
 
+<<<<<<< codex/explain-codebase-structure-and-guidelines-u5n4g8
+## 9) Migration & Seeder (CodeIgniter)
+
+Project ini sekarang menyediakan migration dan seeder native CodeIgniter:
+
+- Migration schema: `application/migrations/20260206090000_init_irbac_schema.php`
+- Seeder runner library: `application/libraries/Seeder.php`
+- Initial seeder: `application/seeders/InitialSeeder.php`
+- CLI command: `application/controllers/CommandsController.php`
+
+### 9.1 Menjalankan migration
+
+```bash
+php index.php CommandsController actionMigrate
+```
+
+### 9.2 Menjalankan seeder
+
+```bash
+php index.php CommandsController actionSeed
+```
+
+### 9.3 Menjalankan migration + seeder sekaligus
+
+```bash
+php index.php CommandsController actionMigrateAndSeed
+```
+
+### 9.4 Default credential seed
+
+Seeder akan membuat user admin default:
+
+- username: `admin`
+- password: `4dm1n-Rbac`
+
+> Catatan: migration dan seeder **tidak bergantung** pada pembacaan file `irbac.sql` saat runtime; schema dan seed statement sudah didefinisikan langsung di file migration/seeder.
+
+---
+
+## 10) Developer Workflow (fitur baru)
+=======
 ## 9) Developer Workflow (fitur baru)
+>>>>>>> master
 
 Contoh: menambah modul `Blog`.
 
@@ -253,7 +295,11 @@ Contoh: menambah modul `Blog`.
 
 ---
 
+<<<<<<< codex/explain-codebase-structure-and-guidelines-u5n4g8
+## 11) Dokumentasi Otomatis ke Depan (WAJIB)
+=======
 ## 10) Dokumentasi Otomatis ke Depan (WAJIB)
+>>>>>>> master
 
 Agar dokumentasi ini selalu up-to-date, gunakan aturan berikut:
 
@@ -273,11 +319,19 @@ Agar dokumentasi ini selalu up-to-date, gunakan aturan berikut:
 
 ---
 
+<<<<<<< codex/explain-codebase-structure-and-guidelines-u5n4g8
+## 12) Quick Checklist untuk Developer Baru
+
+- [ ] Jalankan `composer install`.
+- [ ] Copy `.env.example` → `.env` dan isi semua variabel penting.
+- [ ] Jalankan migration + seeder via CLI command.
+=======
 ## 11) Quick Checklist untuk Developer Baru
 
 - [ ] Jalankan `composer install`.
 - [ ] Copy `.env.example` → `.env` dan isi semua variabel penting.
 - [ ] Import `irbac.sql`.
+>>>>>>> master
 - [ ] Pastikan route default (`/site`) bisa diakses.
 - [ ] Login menggunakan akun seed data.
 - [ ] Cek menu RBAC (`/rbac/*`) untuk memahami relasi route-permission-group.
