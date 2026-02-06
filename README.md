@@ -24,5 +24,9 @@ Core dari [Codeigniter 3](https://github.com/bcit-ci/CodeIgniter) yg sudah diuba
 * Sesuaikan koneksi db anda di file tersebut
 * (Tambahan) Saya sarankan untuk akses file dengan menggunakan fitur [vhost](https://www.cloudways.com/blog/configure-virtual-host-on-windows-10-for-wordpress/)
 
+
+## Dokumentasi
+- Panduan teknis lengkap: [`docs/CORE_IRBAC_GUIDE.md`](docs/CORE_IRBAC_GUIDE.md)
+
 ## Lisensi
 [MIT](https://choosealicense.com/licenses/mit/)
